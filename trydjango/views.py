@@ -14,7 +14,6 @@ def home(request):
     # from the database
     article = Article.objects.get(id=2)
     articles = Article.objects.all() # type: QuerySet
-    print(articles)
     
 
     context = {

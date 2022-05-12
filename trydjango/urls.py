@@ -23,6 +23,7 @@ from articles import views
 
 urlpatterns = [
     path('', home),
+    path('articles/', views.article_search_view),
     path('articles/<int:id>/', views.article_detail_view),
     # url(r'articles/(?P<id>d+)/$', view_function), old one
     path('admin/', admin.site.urls),
