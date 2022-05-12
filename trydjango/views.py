@@ -4,7 +4,7 @@ To render html web pages
 from django.http import HttpResponse
 
 from articles.models import Article
-from django.template.loader import render_to_string
+from django.template.loader import render_to_string, get_template
 
 def home(request):
     """
@@ -21,7 +21,9 @@ def home(request):
     }
 
     # Djando templates
-    HTML_STRING = render_to_string("home-view.html", context=context)
+    template = get_template("home-view.html")
+    template_string = template.render(context=context)
+    # HTML_STRING = render_to_string("home-view.html", context=context)
 
 
-    return HttpResponse(HTML_STRING)
+    return HttpResponse(template_string)
