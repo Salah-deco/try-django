@@ -14,9 +14,17 @@ def home(request):
     # from the database
     article = Article.objects.get(id=2)
 
+    context = {
+        "id": article.id,
+        "title": article.title,
+        "content": article.content
+    }
+
     # Djando templates
-    TITLE = f"""<h1>{article.title} ({article.id})</h1>"""
-    CONTENT = f"""<p>{article.content}</p>"""
-    HTML_STRING = TITLE + CONTENT
+    HTML_STRING = """
+    <h1>{title} ({id})</h1>
+    <p>{content}</p>
+    """.format(**context)
+
 
     return HttpResponse(HTML_STRING)
