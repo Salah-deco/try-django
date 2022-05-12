@@ -17,8 +17,13 @@ from django.contrib import admin
 from django.urls import path
 
 from .views import home
+from articles import views
+# import articles
+# from articles import urls as articles_urls
 
 urlpatterns = [
     path('', home),
+    path('articles/<int:id>/', views.article_detail_view),
+    # url(r'articles/(?P<id>d+)/$', view_function), old one
     path('admin/', admin.site.urls),
 ]

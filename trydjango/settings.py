@@ -56,7 +56,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'trydjango', 'templates'),
+            os.path.join(BASE_DIR, 'templates'),
             # 'C:\Users\salah\Desktop\Django\codingEntrepreneurs\\trydjango\\templates',
         ],
         'APP_DIRS': True,

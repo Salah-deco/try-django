@@ -4,7 +4,7 @@ To render html web pages
 from django.http import HttpResponse
 
 from articles.models import Article
-from django.template.loader import render_to_string, get_template
+from django.template.loader import render_to_string
 
 def home(request):
     """
@@ -13,17 +13,19 @@ def home(request):
     """
     # from the database
     article = Article.objects.get(id=2)
+    articles = Article.objects.all() # type: QuerySet
+    print(articles)
+    
 
     context = {
         "id": article.id,
         "title": article.title,
-        "content": article.content
+        "content": article.content,
+        "articles": articles
     }
 
     # Djando templates
-    template = get_template("home-view.html")
-    template_string = template.render(context=context)
-    # HTML_STRING = render_to_string("home-view.html", context=context)
+    # render_to_string, get_template and select_template 
+    HTML_STRING = render_to_string("home-view.html", context=context)
 
-
-    return HttpResponse(template_string)
+    return HttpResponse(HTML_STRING)
