@@ -1,5 +1,5 @@
-from tkinter import NONE
-from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 from articles.models import Article
@@ -24,7 +24,11 @@ def article_search_view(request):
     }
     return render(request, 'articles/search.html', context=context)
 
+@login_required
 def article_create_view(request):
+    # if not request.user.is_authenticated:
+    #     return redirect('/login')
+
     if request.method == 'POST':
         title = request.POST.get('title')
         content = request.POST.get('content')
