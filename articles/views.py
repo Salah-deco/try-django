@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 from articles.models import Article
-from .forms import ArticleForm
+from .forms import ArticleForm, ArticleModelForm
 # Create your views here.
 def article_search_view(request): 
     query_dict = request.GET
@@ -18,18 +18,35 @@ def article_search_view(request):
     }
     return render(request, 'articles/search.html', context=context)
 
+# Create a new article (forms.ModelForm)
 # @login_required
 def article_create_view(request):
-    form = ArticleForm(request.POST or None)
+    form = ArticleModelForm(request.POST or None)
     context = { "form": form }
     
     if form.is_valid(): # == cleaned_data
-        title = form.cleaned_data.get('title')
-        content = form.cleaned_data.get('content')
-        article_object = Article.objects.create(title=title, content=content)
+        article_object = form.save() # the same for get data and call Article.objects.create(data)
+        context['form'] = ArticleModelForm()
+        # title = form.cleaned_data.get('title')
+        # content = form.cleaned_data.get('content')
+        # article_object = Article.objects.create(title=title, content=content)
+        
         context["objects"] = article_object
         context["created"] = True
     return render(request, 'articles/create.html', context=context)
+
+# create a new article using forms.Form
+# def article_create_view(request):
+#     form = ArticleForm(request.POST or None)
+#     context = { "form": form }
+
+#     if form.is_valid(): # == cleaned_data
+#         title = form.cleaned_data.get('title')
+#         content = form.cleaned_data.get('content')
+#         article_object = Article.objects.create(title=title, content=content)
+#         context["objects"] = article_object
+#         context["created"] = True
+#     return render(request, 'articles/create.html', context=context)
 
 # def article_create_view(request):
 #     # if not request.user.is_authenticated:

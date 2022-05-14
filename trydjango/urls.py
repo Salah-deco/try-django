@@ -30,12 +30,13 @@ from test_app.views import CreateStudentForm
 from accounts.views import (
     login_view,
     logout_view,
-    # register_view
+    register_view
 )
 urlpatterns = [
     path('', home),
     path('login/', login_view),
     path('logout/', logout_view),
+    path('register', register_view),
     path('articles/', article_search_view),
     path('articles/create/', article_create_view),
     path('articles/<int:id>/', article_detail_view),
