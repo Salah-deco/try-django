@@ -2,3 +2,4 @@ Include/*
 Scripts/*
 Lib/*
 .env
+test_app/*
