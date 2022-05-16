@@ -23,7 +23,6 @@ from articles.views import (
     article_create_view
 )
 
-from test_app.views import CreateStudentForm
 # import articles
 # from articles import urls as articles_urls
 
@@ -41,6 +40,5 @@ urlpatterns = [
     path('articles/create/', article_create_view),
     path('articles/<int:id>/', article_detail_view),
     # url(r'articles/(?P<id>d+)/$', view_function), old one
-    path('admin/', admin.site.urls),
-    path('studentform/', CreateStudentForm)
+    path('admin/', admin.site.urls)
 ]
